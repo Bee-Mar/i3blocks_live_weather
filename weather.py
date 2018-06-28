@@ -14,7 +14,13 @@ icon = ['', '', '', '', '', '']
 
 owm = pyowm.OWM(key)
 
-weather = owm.weather_at_place(location).get_weather()
+try:
+    weather = owm.weather_at_place(location).get_weather()
+    
+except Exception, e:
+    print "Weather N/A"
+    exit(0)
+
 temp = str(json.loads(json.dumps(weather.get_temperature(temp_scale)))['temp']) + temp_symbol
 status = str(weather.get_status())
 
